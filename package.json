@@ -1,0 +1,27 @@
+{
+  "name": "diagnosconnect",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DiagnoConnect - Enterprise Healthcare SaaS Platform",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:patient": "npm run dev --workspace=apps/patient-portal",
+    "dev:admin": "npm run dev --workspace=apps/admin-dashboard",
+    "build:backend": "npm run build --workspace=packages/backend",
+    "build:patient": "npm run build --workspace=apps/patient-portal",
+    "build:admin": "npm run build --workspace=apps/admin-dashboard",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "db:migrate": "npm run prisma:migrate --workspace=packages/backend",
+    "db:seed": "npm run prisma:seed --workspace=packages/backend",
+    "db:generate": "npm run prisma:generate --workspace=packages/backend",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

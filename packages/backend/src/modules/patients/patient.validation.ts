@@ -1,0 +1,77 @@
+import { z } from 'zod';
+
+export const createPatientSchema = z.object({
+  body: z.object({
+    firstName: z.string().min(1).max(100),
+    lastName: z.string().min(1).max(100),
+    dateOfBirth: z.string().or(z.date()),
+    gender: z.enum(['MALE', 'FEMALE', 'OTHER']),
+    bloodGroup: z.enum(['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 'O_POSITIVE', 'O_NEGATIVE']).optional(),
+    maritalStatus: z.enum(['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED']).optional(),
+    nationality: z.string().optional(),
+    phone: z.string().optional(),
+    alternatePhone: z.string().optional(),
+    email: z.string().email().optional().or(z.literal('')),
+    address: z.object({
+      street: z.string().optional(),
+      city: z.string().optional(),
+      state: z.string().optional(),
+      country: z.string().optional(),
+      zipCode: z.string().optional(),
+    }).optional(),
+    occupation: z.string().optional(),
+    insuranceProvider: z.string().optional(),
+    insurancePolicyNumber: z.string().optional(),
+    insuranceExpiry: z.string().or(z.date()).optional(),
+    insuranceCardNumber: z.string().optional(),
+    allergies: z.array(z.string()).optional(),
+    chronicConditions: z.array(z.string()).optional(),
+    emergencyContactName: z.string().optional(),
+    emergencyContactPhone: z.string().optional(),
+    emergencyContactRelation: z.string().optional(),
+    guardianName: z.string().optional(),
+    guardianPhone: z.string().optional(),
+    guardianRelation: z.string().optional(),
+    notes: z.string().optional(),
+  }),
+});
+
+export const updatePatientSchema = z.object({
+  body: z.object({
+    firstName: z.string().min(1).max(100).optional(),
+    lastName: z.string().min(1).max(100).optional(),
+    dateOfBirth: z.string().or(z.date()).optional(),
+    gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
+    bloodGroup: z.enum(['A_POSITIVE', 'A_NEGATIVE', 'B_POSITIVE', 'B_NEGATIVE', 'AB_POSITIVE', 'AB_NEGATIVE', 'O_POSITIVE', 'O_NEGATIVE']).optional(),
+    maritalStatus: z.enum(['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED']).optional(),
+    nationality: z.string().optional(),
+    phone: z.string().optional(),
+    alternatePhone: z.string().optional(),
+    email: z.string().email().optional(),
+    address: z.any().optional(),
+    occupation: z.string().optional(),
+    insuranceProvider: z.string().optional(),
+    insurancePolicyNumber: z.string().optional(),
+    insuranceCardNumber: z.string().optional(),
+    allergies: z.array(z.string()).optional(),
+    chronicConditions: z.array(z.string()).optional(),
+    emergencyContactName: z.string().optional(),
+    emergencyContactPhone: z.string().optional(),
+    emergencyContactRelation: z.string().optional(),
+    notes: z.string().optional(),
+  }),
+});
+
+export const patientQuerySchema = z.object({
+  query: z.object({
+    page: z.string().optional(),
+    limit: z.string().optional(),
+    search: z.string().optional(),
+    sortBy: z.string().optional(),
+    sortOrder: z.enum(['asc', 'desc']).optional(),
+    gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
+    bloodGroup: z.string().optional(),
+    isActive: z.string().optional(),
+    hasInsurance: z.string().optional(),
+  }),
+});
